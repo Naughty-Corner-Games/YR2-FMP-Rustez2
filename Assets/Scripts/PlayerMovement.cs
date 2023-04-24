@@ -30,6 +30,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float groundDistance = 0.2f;
+
+
+    [Header("Axe")]
+    public Axe axe;
+    public Animator axeAnim;
+
     public bool isGrounded { get; private set; }
 
     [SerializeField] private InventoryManager inventory;
@@ -83,14 +89,15 @@ public class PlayerMovement : MonoBehaviour
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
 
         //Player Uses Items.
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) )
         {
+            
             if(!(inventory.selectedItem is null))
                 inventory.selectedItem.Use(this);
 
             if(inventory.selectedItem.itemType == ItemType.Tool)
             {
-                anim.SetTrigger("Swing");
+                axeAnim.SetTrigger("Swing");
             }
         }
 

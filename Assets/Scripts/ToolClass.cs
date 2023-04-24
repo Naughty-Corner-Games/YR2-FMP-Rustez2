@@ -9,7 +9,7 @@ public class ToolClass : ItemClass
     {
        
         //base.Use();
-        Debug.Log(toolType + " " + damageDealt);
+        //Debug.Log(toolType + " " + damageDealt);
     }
 
     public override ToolClass GetTool() { return this; }
