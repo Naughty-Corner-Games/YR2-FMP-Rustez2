@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Stats")]
+    public float Health;
+
     [SerializeField] private float playerHeight = 2f;
     [SerializeField] private Transform orientation;
     public Animator playerAnim;
