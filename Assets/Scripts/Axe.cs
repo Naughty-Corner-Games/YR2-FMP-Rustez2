@@ -47,23 +47,11 @@ public class Axe : MonoBehaviour
             axeSwing = false;
             Debug.Log(axeSwing);
             tree.anim.SetTrigger("Hit");
-            tree.health -= damage;
-
-
-
+            tree.Health -= tree.Damage;
+           
+            
             //Debug.Log(axeSwing);
-            Debug.Log(tree.health);
-
-            if (tree.health <= 0)
-            {
-                var appleFreq = Random.Range(0, 4);
-                Destroy(tree.gameObject);
-                inv.Add(Wood, 3, "wood");
-                if(appleFreq > 0)
-                    inv.Add(Apple, appleFreq, "apple");
-            }
-
-
+            Debug.Log(tree.Health);
 
         }
         else

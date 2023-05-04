@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Stats")]
-    public float Health;
+    public float PlayerHealth = 100;
+
 
     [SerializeField] private float playerHeight = 2f;
     [SerializeField] private Transform orientation;
@@ -104,6 +106,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+    }
+
+    public void PlayerStats()
+    {
+        if (PlayerHealth <= 0)
+            SceneManager.LoadScene(0);
+            
     }
 
     private void MyInput()
