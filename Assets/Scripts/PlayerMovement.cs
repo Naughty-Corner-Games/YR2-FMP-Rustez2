@@ -58,6 +58,25 @@ public class PlayerMovement : MonoBehaviour
     public float reducedHeight;
     public CapsuleCollider col;
 
+    [Header("Damage")]
+    public StatsClass enemyStats;
+
+    public void TakeDamage()
+    {
+        PlayerHealth -= enemyStats.Damage;
+        if(PlayerHealth <= 0) {
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage();
+        }
+    }
+
     #region Movement
     private bool OnSlope()
     {
