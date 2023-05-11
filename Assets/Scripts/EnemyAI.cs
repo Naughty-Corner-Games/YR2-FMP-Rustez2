@@ -12,12 +12,16 @@ public class EnemyAI : MonoBehaviour
     private Transform WayPoint;
     private Animator anim;
     private PlayerMovement Pm;
-
+    public Stats EnemyStats;
+    public float Health;
+    private float Damage;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim= GetComponent<Animator>();
+        Health = EnemyStats.Health;
+        Damage = EnemyStats.Damage;
     }
 
     public void Patrol()
@@ -44,6 +48,12 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    public void Hit()
+    {
+        Health -= Damage;
+    }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -52,5 +62,16 @@ public class EnemyAI : MonoBehaviour
         distance = Vector3.Distance(agent.transform.position, Player.transform.position);
         Patrol();
         Follow();
+
+
+
+
+
+        if (Health <= 0)
+            Destroy(this.gameObject);
+            
+
+
+
     }
 }

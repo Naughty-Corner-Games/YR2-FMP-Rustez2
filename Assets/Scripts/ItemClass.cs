@@ -24,5 +24,6 @@ public enum ItemType
 {
     Item,
     Consumable,
-    Tool
+    Tool,
+    Craftable
 };

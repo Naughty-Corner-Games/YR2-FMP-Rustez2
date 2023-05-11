@@ -135,8 +135,8 @@ public class InventoryManager : MonoBehaviour
             {
                 inventorySlots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
                 inventorySlots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].item.itemIcon;
-                
-                if(items[i].item.isStackable)
+                inventorySlots[i].transform.GetChild(0).GetComponent<Image>().preserveAspect = true;
+                if (items[i].item.isStackable)
                     inventorySlots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = items[i].quantity + "";
                 else
                     inventorySlots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = "";
@@ -146,6 +146,7 @@ public class InventoryManager : MonoBehaviour
                 inventorySlots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
                 inventorySlots[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
                 inventorySlots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = "";
+                inventorySlots[i].transform.GetChild(0).GetComponent<Image>().preserveAspect = false;
             }
         }
 
@@ -160,7 +161,8 @@ public class InventoryManager : MonoBehaviour
             {
                 hotbarSlots[i].transform.GetChild(0).GetComponent<Image>().enabled = true;
                 hotbarSlots[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].item.itemIcon;
-                if(items[i].item.isStackable)
+                hotbarSlots[i].transform.GetChild(0).GetComponent<Image>().preserveAspect = true;
+                if (items[i].item.isStackable)
                     hotbarSlots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = items[i].quantity + "";
                 else
                     hotbarSlots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = "";
@@ -170,6 +172,7 @@ public class InventoryManager : MonoBehaviour
                 hotbarSlots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
                 hotbarSlots[i].transform.GetChild(0).GetComponent<Image>().enabled = false;
                 hotbarSlots[i].transform.GetChild(1).GetComponent<TMP_Text>().text = "";
+                hotbarSlots[i].transform.GetChild(0).GetComponent<Image>().preserveAspect = false;
             }
         }
     }

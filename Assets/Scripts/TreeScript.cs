@@ -5,7 +5,7 @@ using UnityEngine;
 public class TreeScript : MonoBehaviour 
 {
  
-    [SerializeField] private StatsClass StatsClass;
+    public Stats StatsClass;
     public ItemClass Wood;
     public ItemClass Apple;
     public InventoryManager inv;
@@ -17,10 +17,12 @@ public class TreeScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StatsClass = Resources.Load<Stats>("TreeStats");
         anim = GetComponent<Animator>();
         Health = StatsClass.Health;
         Damage = StatsClass.Damage;
-
+        inv = FindObjectOfType<InventoryManager>();
+        
     }
 
 

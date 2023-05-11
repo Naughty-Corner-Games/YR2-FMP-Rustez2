@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class Axe : MonoBehaviour
@@ -13,7 +14,8 @@ public class Axe : MonoBehaviour
     public int damage = 20;
     public ItemClass Wood;
     public ItemClass Apple;
-    
+    public EnemyAI EnemyAI;
+  
     //public int appleFreq;
 
 
@@ -36,13 +38,14 @@ public class Axe : MonoBehaviour
 
     }
 
-
+    
+   
 
 
     private void OnCollisionStay(Collision collision)
     {
         tree = collision.collider.gameObject.GetComponent<TreeScript>();
-        if (collision.gameObject.CompareTag("Tree") && axeSwing)
+        if (collision.gameObject.CompareTag("Tree") && axeSwing && inv.selectedItem.GetTool().toolType == ToolType.Axe)
         {
             axeSwing = false;
             Debug.Log(axeSwing);
@@ -54,8 +57,17 @@ public class Axe : MonoBehaviour
             Debug.Log(tree.Health);
 
         }
-        else
-            return;
+
+        EnemyAI = collision.gameObject.GetComponent<EnemyAI>();
+        if (collision.gameObject.CompareTag("Enemy") && axeSwing && inv.selectedItem.GetTool().toolType == ToolType.Spear)
+        {
+            axeSwing = false;
+            EnemyAI.Hit();
+            Debug.Log("Hitting Enemy");
+            Debug.Log(EnemyAI.Health);
+        }
+
+
 
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class StatsClass : ScriptableObject
+public class Stats : ScriptableObject
 {
     
     public float Health;

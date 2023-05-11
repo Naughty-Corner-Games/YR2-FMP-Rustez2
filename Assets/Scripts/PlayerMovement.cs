@@ -1,3 +1,4 @@
+using System.IO.Ports;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,9 +38,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundDistance = 0.2f;
 
 
-    [Header("Axe")]
+    [Header("Tools")]
     public Axe axe;
-    public Animator axeAnim;
+    public Animator ToolAnim;
+    public GameObject AXE;
+    public GameObject Spear;
 
     public bool isGrounded { get; private set; }
 
@@ -52,14 +55,14 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    [SerializeField] private Animator anim;
+    //[SerializeField] private Animator anim;
 
     public float originalHeight;
     public float reducedHeight;
     public CapsuleCollider col;
 
     [Header("Damage")]
-    public StatsClass enemyStats;
+    public Stats enemyStats;
 
     public void TakeDamage()
     {
@@ -113,17 +116,52 @@ public class PlayerMovement : MonoBehaviour
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
 
         //Player Uses Items.
-        if(Input.GetMouseButtonDown(0) )
+        if (Input.GetMouseButtonDown(0))
         {
-            
-            if(!(inventory.selectedItem is null))
+
+            if (!(inventory.selectedItem is null))
                 inventory.selectedItem.Use(this);
 
-            if(inventory.selectedItem.itemType == ItemType.Tool)
+            if (inventory.selectedItem.itemType == ItemType.Tool)
             {
-                axeAnim.SetTrigger("Swing");
+                ToolAnim.SetTrigger("Swing");
             }
         }
+
+        if (inventory.selectedItem is not null)
+        {
+
+
+            switch (inventory.selectedItem.GetTool().toolType)
+            {
+                case ToolType.Spear:
+                    {
+                        Spear.SetActive(true);
+                        AXE.SetActive(false);
+                        ToolAnim.runtimeAnimatorController = inventory.selectedItem.GetTool().AnimCont;
+                        break;
+                    }
+
+                case ToolType.Axe:
+                    {
+                        Spear.SetActive(false);
+                        AXE.SetActive(true);
+                        ToolAnim.runtimeAnimatorController = inventory.selectedItem.GetTool().AnimCont;
+                        break;
+
+                    }
+
+            }
+
+        }
+        else
+        {
+            //nothing in hand
+            Spear.SetActive(false);
+            AXE.SetActive(false);
+            ToolAnim.runtimeAnimatorController = null;
+        }
+
 
     }
 
