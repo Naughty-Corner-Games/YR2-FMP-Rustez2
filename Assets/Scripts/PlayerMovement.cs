@@ -68,9 +68,15 @@ public class PlayerMovement : MonoBehaviour
     {
         PlayerHealth -= enemyStats.Damage;
         if(PlayerHealth <= 0) {
-            SceneManager.LoadScene(0);
+            GameOver();
         }
     }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 
     private void OnCollisionEnter(Collision collision)
     {

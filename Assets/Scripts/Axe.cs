@@ -38,37 +38,38 @@ public class Axe : MonoBehaviour
 
     }
 
-    
-   
 
-
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        tree = collision.collider.gameObject.GetComponent<TreeScript>();
-        if (collision.gameObject.CompareTag("Tree") && axeSwing && inv.selectedItem.GetTool().toolType == ToolType.Axe)
+        tree = other.gameObject.GetComponent<TreeScript>();
+        if (other.gameObject.CompareTag("Tree") && axeSwing && inv.selectedItem.GetTool().toolType == ToolType.Axe)
         {
             axeSwing = false;
             Debug.Log(axeSwing);
             tree.anim.SetTrigger("Hit");
             tree.Health -= tree.Damage;
-           
-            
+
+
             //Debug.Log(axeSwing);
             Debug.Log(tree.Health);
 
         }
 
-        EnemyAI = collision.gameObject.GetComponent<EnemyAI>();
-        if (collision.gameObject.CompareTag("Enemy") && axeSwing && inv.selectedItem.GetTool().toolType == ToolType.Spear)
+        EnemyAI = other.gameObject.GetComponent<EnemyAI>();
+        if (other.gameObject.CompareTag("Enemy") && axeSwing && inv.selectedItem.GetTool().toolType == ToolType.Spear)
         {
+
             axeSwing = false;
             EnemyAI.Hit();
             Debug.Log("Hitting Enemy");
             Debug.Log(EnemyAI.Health);
         }
 
+    }
 
-
+    private void OnCollisionStay(Collision collision)
+    {
+        
     }
 
     public void AxeSwingFalse()

@@ -17,7 +17,7 @@ public class CraftingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
        
     }
 }
