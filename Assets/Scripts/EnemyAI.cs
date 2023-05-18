@@ -41,10 +41,12 @@ public class EnemyAI : MonoBehaviour
 
     public void Attack()
     {
-        if (distance < 2)
+        if (distance <= 2)
         {
-            //anim.SetTrigger("");
-        
+
+            Pm.TakeDamage(10);
+            Debug.Log("Damage");
+            
         }
     }
 
@@ -73,5 +75,14 @@ public class EnemyAI : MonoBehaviour
 
 
 
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Pm.TakeDamage(10);
+        }
     }
 }

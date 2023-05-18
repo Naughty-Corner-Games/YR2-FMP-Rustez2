@@ -1,11 +1,15 @@
 using System.IO.Ports;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    
+
+
     [Header("Stats")]
-    public float PlayerHealth = 100;
+    public float PlayerHealth = 100f;
 
 
     [SerializeField] private float playerHeight = 2f;
@@ -63,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Damage")]
     public Stats enemyStats;
+    public Slider healthValue;
 
     public void TakeDamage()
     {
@@ -109,12 +114,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        healthValue.value = PlayerHealth;
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         MyInput();
         ControlDrag();
         ControlSpeed();
         Crouch();
+        PlayerStats();
+        //TakeDamage();
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
             Jump();
@@ -250,5 +259,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
    
+    }
+
+    public void TakeDamage(float damage)
+    {
+        PlayerHealth -= damage;
     }
 }
