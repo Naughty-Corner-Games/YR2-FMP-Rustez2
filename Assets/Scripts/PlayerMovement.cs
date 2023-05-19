@@ -1,3 +1,4 @@
+using System.Collections;
 using System.IO.Ports;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 slopeMoveDirection;
     private Rigidbody rb;
     private RaycastHit slopeHit;
+    private EnemyAI enemy;
 
 
 
@@ -69,9 +71,10 @@ public class PlayerMovement : MonoBehaviour
     public Stats enemyStats;
     public Slider healthValue;
 
-    public void TakeDamage()
+  
+    public void TakeDamage(Stats stats)
     {
-        PlayerHealth -= enemyStats.Damage;
+        PlayerHealth -= stats.Damage;
         if(PlayerHealth <= 0) {
             GameOver();
         }
@@ -83,11 +86,13 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.CompareTag("Enemy"))
+        if(other.gameObject.CompareTag("Enemy"))
         {
-            TakeDamage();
+            //TakeDamage(other.gameObject.GetComponent<Stats>());
+            Debug.Log("Player Hit");
+            enemy = other.gameObject.GetComponent<EnemyAI>();
         }
     }
 
@@ -261,8 +266,17 @@ public class PlayerMovement : MonoBehaviour
    
     }
 
+
+    public IEnumerator Cooldown()
+    {
+        enemy.canAttack = false;
+        yield return new WaitForSeconds(1);
+        enemy.canAttack = true;
+    }
     public void TakeDamage(float damage)
     {
+
         PlayerHealth -= damage;
+        Debug.Log("Player Hit");
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyStats
   m_EditorClassIdentifier: 
   Health: 100
-  Damage: 20
+  Damage: 10
   Speed: 0
   Hunger: 0
   Water: 0

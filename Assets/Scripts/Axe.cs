@@ -11,7 +11,7 @@ public class Axe : MonoBehaviour
     public InventoryManager inv;
     public bool axeSwing;
     public LayerMask TreeMask;
-    public int damage = 20;
+    public int damage = 10;
     public ItemClass Wood;
     public ItemClass Apple;
     public EnemyAI EnemyAI;
@@ -74,7 +74,7 @@ public class Axe : MonoBehaviour
 
     public void AxeSwingFalse()
     {
-      
+        axeSwing = false;
     }
 
 }

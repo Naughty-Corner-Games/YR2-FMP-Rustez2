@@ -8,13 +8,14 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent agent;
     private Vector3 PlayerTrans;
     public GameObject Player;
-    private float distance;
+    private Vector3 distance;
     private Transform WayPoint;
     private Animator anim;
     private PlayerMovement Pm;
     public Stats EnemyStats;
     public float Health;
     private float Damage;
+    public bool canAttack = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,18 +23,19 @@ public class EnemyAI : MonoBehaviour
         anim= GetComponent<Animator>();
         Health = EnemyStats.Health;
         Damage = EnemyStats.Damage;
+        Pm = Player.gameObject.GetComponent<PlayerMovement>();
     }
 
     public void Patrol()
     {
-        if (distance >= 10)
+        if (distance.magnitude >= 10)
         {
             agent.SetDestination(agent.transform.position);
         }
     }
     public void Follow()
     {
-        if (distance < 10)
+        if (distance.magnitude < 10)
         {
             agent.SetDestination(PlayerTrans);
         }
@@ -41,9 +43,9 @@ public class EnemyAI : MonoBehaviour
 
     public void Attack()
     {
-        if (distance <= 2)
+        if (distance.magnitude < 2 && canAttack)
         {
-
+            StartCoroutine(Pm.Cooldown());
             Pm.TakeDamage(10);
             Debug.Log("Damage");
             
@@ -60,12 +62,15 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         PlayerTrans = Player.transform.position;
-        
-        distance = Vector3.Distance(agent.transform.position, Player.transform.position);
+
+        //distance = Vector3.Distance(agent.transform.position, Player.transform.position);
+        //distance = (Vector3)Vector3.Distance(agent.transform.position, PlayerTrans.transform.position);
+
+        distance = transform.position - Player.transform.position;
         Patrol();
         Follow();
-
-
+        Attack();
+        Debug.Log(distance.magnitude);
 
 
 
@@ -78,11 +83,5 @@ public class EnemyAI : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Pm.TakeDamage(10);
-        }
-    }
+    
 }
