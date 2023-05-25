@@ -8,7 +8,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject inventory;
     [SerializeField] private GameObject inventorySlotHolder;
     [SerializeField] private SlotClass[] starterItems;
-    private SlotClass[] items;
+    public SlotClass[] items;
     private GameObject[] inventorySlots;
     private bool isInventoryActive;
 
@@ -27,6 +27,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private SlotClass movingSlot;
     private SlotClass tempSlot;
     private SlotClass originSlot;
+
+
+    public GameObject Crafting;
 
     private void Start()
     {
@@ -81,6 +84,7 @@ public class InventoryManager : MonoBehaviour
 
             //set to opposite of current state
             inventory.SetActive(!inventory.activeSelf);
+            Crafting.SetActive(!Crafting.activeSelf);
             //hotbar.SetActive(!hotbar.activeSelf); 
 
             isInventoryActive = inventory.activeSelf; 
@@ -88,13 +92,13 @@ public class InventoryManager : MonoBehaviour
 
         if(isInventoryActive)
         { //Show mouse when inventory open
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
         else 
         { //Hide mouse when inventory closed
-            Time.timeScale = 1;
+           // Time.timeScale = 1;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
@@ -126,7 +130,7 @@ public class InventoryManager : MonoBehaviour
     }
 
     #region Inventory UItils
-    private void RefreshInventoryUI()
+    public void RefreshInventoryUI()
     {
         //loop through every item and determine if an item is stored, if true then set image, item count and everything else
         for (int i = 0; i < inventorySlots.Length; i++)
@@ -216,14 +220,14 @@ public class InventoryManager : MonoBehaviour
         return true;
     }  
 
-    public bool Remove(ItemClass item)
+    public bool Remove(ItemClass item, int quantity)
     {
         // items.Remove(item);
         SlotClass temp = Contains(item);
         if(temp != null)
         {
             if(temp.quantity > 1)
-                temp.SubQuantity(1);
+                temp.SubQuantity(quantity);
             else
             {
                 int slotToRemove = 0;

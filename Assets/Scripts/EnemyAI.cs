@@ -41,13 +41,23 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+
+    public IEnumerator Cooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(1);
+        Pm.TakeDamage(10);
+        canAttack = true;
+    }
     public void Attack()
     {
+
+
         if (distance.magnitude < 2 && canAttack)
         {
-            StartCoroutine(Pm.Cooldown());
-            Pm.TakeDamage(10);
-            Debug.Log("Damage");
+            StartCoroutine(Cooldown());
+          
+         
             
         }
     }
@@ -70,7 +80,7 @@ public class EnemyAI : MonoBehaviour
         Patrol();
         Follow();
         Attack();
-        Debug.Log(distance.magnitude);
+     
 
 
 

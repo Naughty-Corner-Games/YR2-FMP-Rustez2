@@ -72,13 +72,15 @@ public class PlayerMovement : MonoBehaviour
     public Slider healthValue;
 
   
-    public void TakeDamage(Stats stats)
+   /* public void TakeDamage(Stats stats)
     {
         PlayerHealth -= stats.Damage;
+        Debug.Log("Takedamage 2");
         if(PlayerHealth <= 0) {
             GameOver();
         }
     }
+    */
 
     public void GameOver()
     {
@@ -86,15 +88,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.CompareTag("Enemy"))
-        {
-            //TakeDamage(other.gameObject.GetComponent<Stats>());
-            Debug.Log("Player Hit");
-            enemy = other.gameObject.GetComponent<EnemyAI>();
-        }
-    }
+    
 
     #region Movement
     private bool OnSlope()
@@ -267,16 +261,11 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public IEnumerator Cooldown()
-    {
-        enemy.canAttack = false;
-        yield return new WaitForSeconds(1);
-        enemy.canAttack = true;
-    }
+    
     public void TakeDamage(float damage)
     {
 
         PlayerHealth -= damage;
-        Debug.Log("Player Hit");
+       
     }
 }

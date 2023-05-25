@@ -16,6 +16,7 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 65af0a1eccaadbb4ca241631e4f8bc21, type: 3}
   isStackable: 0
   maxStackSize: 64
+  isCraftable: 1
   itemType: 2
   damageDealt: 5
   toolType: 3

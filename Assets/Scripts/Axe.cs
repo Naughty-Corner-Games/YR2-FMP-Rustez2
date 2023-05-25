@@ -34,7 +34,7 @@ public class Axe : MonoBehaviour
     public void AxeSwung()
     {
         axeSwing = true;
-        Debug.Log(axeSwing);
+    
 
     }
 

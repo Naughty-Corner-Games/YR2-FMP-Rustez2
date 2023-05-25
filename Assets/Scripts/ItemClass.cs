@@ -7,6 +7,7 @@ public class ItemClass : ScriptableObject
     public Sprite itemIcon = null;
     public bool isStackable = true;
     public int maxStackSize = 64;
+    public IsCraftable isCraftable;
     public ItemType itemType;
     //public Animator itemAnimation;
 
@@ -25,5 +26,12 @@ public enum ItemType
     Item,
     Consumable,
     Tool,
-    Craftable
+    
 };
+
+public enum IsCraftable
+{ 
+   nc,
+   isCraftable,
+
+}
