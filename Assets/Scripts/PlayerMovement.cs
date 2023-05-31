@@ -71,20 +71,21 @@ public class PlayerMovement : MonoBehaviour
     public Stats enemyStats;
     public Slider healthValue;
 
-  
-   /* public void TakeDamage(Stats stats)
-    {
-        PlayerHealth -= stats.Damage;
-        Debug.Log("Takedamage 2");
-        if(PlayerHealth <= 0) {
-            GameOver();
-        }
-    }
-    */
 
+    /* public void TakeDamage(Stats stats)
+     {
+         PlayerHealth -= stats.Damage;
+         Debug.Log("Takedamage 2");
+         if(PlayerHealth <= 0) {
+             GameOver();
+         }
+     }
+     */
     public void GameOver()
     {
-        SceneManager.LoadScene(0);
+       
+        SceneManager.LoadScene("GameScene");
+        
     }
 
 
