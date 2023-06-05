@@ -58,6 +58,8 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
+        
+
         if(Input.GetMouseButtonDown(0)) //left click
         {
             if(isInventoryActive)

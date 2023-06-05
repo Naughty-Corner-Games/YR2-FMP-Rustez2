@@ -37,7 +37,7 @@ public class TreeScript : MonoBehaviour
     private IEnumerator Kill()
     {
         anim.SetTrigger("Kill");
-        this.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+        this.gameObject.GetComponent<MeshCollider>().isTrigger = true;
       
         yield return new WaitForSeconds(2);
 

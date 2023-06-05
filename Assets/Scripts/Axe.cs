@@ -67,9 +67,10 @@ public class Axe : MonoBehaviour
 
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnCollisionEnter(Collision collision)
     {
-        
+     
+
     }
 
     public void AxeSwingFalse()

@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
-
+   
 
     [Header("Stats")]
     public float PlayerHealth = 100f;
+    public float Hunger = 100f;
+    public float HungerMulti = 0.1f;
 
 
     [SerializeField] private float playerHeight = 2f;
@@ -58,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     private RaycastHit slopeHit;
     private EnemyAI enemy;
+    public ItemClass AxeClass;
+    public GameObject AxePickup;
 
 
 
@@ -84,12 +87,15 @@ public class PlayerMovement : MonoBehaviour
     public void GameOver()
     {
        
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(0);
         
     }
 
 
-    
+    public void HungerDown()
+    {
+        Hunger -= HungerMulti * Time.deltaTime;
+    }
 
     #region Movement
     private bool OnSlope()
@@ -143,12 +149,15 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (inventory.selectedItem is not null)
+        if (inventory.selectedItem is not null && inventory.selectedItem is ToolClass)
         {
 
 
             switch (inventory.selectedItem.GetTool().toolType)
             {
+
+
+
                 case ToolType.Spear:
                     {
                         Spear.SetActive(true);
@@ -166,6 +175,12 @@ public class PlayerMovement : MonoBehaviour
 
                     }
 
+
+
+
+
+
+                   
             }
 
         }
@@ -179,11 +194,11 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
-
+   
     public void PlayerStats()
     {
-        if (PlayerHealth <= 0)
-            SceneManager.LoadScene(0);
+        if (PlayerHealth <= 0 || Hunger <= 0)
+            GameOver();
             
     }
 
@@ -268,5 +283,19 @@ public class PlayerMovement : MonoBehaviour
 
         PlayerHealth -= damage;
        
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("AxePick"))
+        {
+            inventory.Add(AxeClass, 1,"Axe");
+
+            AxePickup.SetActive(false);
+
+        }
+
+        if (collision.gameObject.CompareTag("Kill"))
+            GameOver();
     }
 }
