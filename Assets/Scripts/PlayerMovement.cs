@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
     private EnemyAI enemy;
     public ItemClass AxeClass;
     public GameObject AxePickup;
+    public ItemClass Apple;
 
 
 
@@ -73,7 +74,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Damage")]
     public Stats enemyStats;
     public Slider healthValue;
+    public Slider hungerValue;
 
+
+    
 
     /* public void TakeDamage(Stats stats)
      {
@@ -121,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         healthValue.value = PlayerHealth;
+        hungerValue.value = Hunger;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
@@ -129,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
         ControlSpeed();
         Crouch();
         PlayerStats();
+        HungerDown();
         //TakeDamage();
 
         if (Input.GetKeyDown(jumpKey) && isGrounded)
@@ -142,6 +148,13 @@ public class PlayerMovement : MonoBehaviour
 
             if (!(inventory.selectedItem is null))
                 inventory.selectedItem.Use(this);
+
+            if(inventory.selectedItem.itemType == ItemType.Consumable)
+            {
+                inventory.Remove(Apple, 1);
+                Hunger += 5;
+                PlayerHealth += 5;
+            }
 
             if (inventory.selectedItem.itemType == ItemType.Tool)
             {

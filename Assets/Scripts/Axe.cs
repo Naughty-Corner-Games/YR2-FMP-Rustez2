@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Axe : MonoBehaviour
