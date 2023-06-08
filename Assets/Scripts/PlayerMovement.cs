@@ -125,6 +125,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
         healthValue.value = PlayerHealth;
         hungerValue.value = Hunger;
 
