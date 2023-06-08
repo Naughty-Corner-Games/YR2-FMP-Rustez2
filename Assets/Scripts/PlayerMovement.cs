@@ -90,8 +90,8 @@ public class PlayerMovement : MonoBehaviour
      */
     public void GameOver()
     {
-       
-        SceneManager.LoadScene(0);
+        SceneManager.UnloadSceneAsync(0);
+        SceneManager.LoadScene(1);
         
     }
 
@@ -119,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         look = GetComponent<PlayerLook>();
+    
        // anim = GetComponentInChildren<Animator>();
     }
 

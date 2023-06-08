@@ -37,18 +37,25 @@ public class TreeScript : MonoBehaviour
     private IEnumerator Kill()
     {
         anim.SetTrigger("Kill");
-        this.gameObject.GetComponent<MeshCollider>().isTrigger = true;
-      
-        yield return new WaitForSeconds(2);
 
-        Destroy(this.gameObject);
+        //this.gameObject.GetComponent<MeshCollider>().isTrigger = true;
+       // this.gameObject.GetComponent<Animator>().gameObject.SetActive(false);
+       // this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+      
+
+
+      
+        yield return new WaitForSeconds(1);
+
+        
+        Debug.Log("yyyyyyyy");
 
         var appleFreq = Random.Range(0, 4);
         if (appleFreq > 0)
             inv.Add(Apple, appleFreq, "apple");
 
         inv.Add(Wood, 3, "Wood");
-
+        Destroy(this.gameObject);
 
        
 

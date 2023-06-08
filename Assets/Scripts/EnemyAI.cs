@@ -53,7 +53,7 @@ public class EnemyAI : MonoBehaviour
     {
 
 
-        if (distance.magnitude < 2 && canAttack)
+        if (distance.magnitude < 3 && canAttack)
         {
             StartCoroutine(Cooldown());
           

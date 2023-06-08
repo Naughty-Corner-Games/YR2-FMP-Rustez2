@@ -1,10 +1,14 @@
+
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
+
+
 
 [CreateAssetMenu]
 public class ToolClass : ItemClass
 {
-    [SerializeField] private int damageDealt = 5;
+   // [SerializeField] private int damageDealt = 5;
     public ToolType toolType;
     public override void Use(PlayerMovement caller)
     {
@@ -13,7 +17,7 @@ public class ToolClass : ItemClass
         //Debug.Log(toolType + " " + damageDealt);
     }
 
-    public AnimatorController AnimCont;
+    public RuntimeAnimatorController AnimCont;
 
     public override ToolClass GetTool() { return this; }
 }
